@@ -30,9 +30,9 @@
 			<button type="button" id="save" class="btn btn-outline-dark" onclick="Modal();">저장</button>
 			<button type="button" id="erase" class="btn btn-outline-dark" onclick="Erase();">초기화</button>
 		</div>
-		<div id="dialog-message" title="저장하시겠습니까?" style="display:none">
+		<!--<div id="dialog-message" title="저장하시겠습니까?" style="display:none;">
 			<span>저장방법을 선택해주세요.</span>
-		</div>
+		</div>-->
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -69,6 +69,20 @@
 					"취소": function () { $(this).dialog('close'); }
 				}
 			});
+		}
+
+		window.onload = function () {
+			var filter = "win16|win32|win64|mac|macintel"; 
+			if ( navigator.platform ) { 
+				if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) { 
+					//mobile 
+					alert('mobile 접속'); 
+				} else {
+					//pc 
+					alert('pc 접속');
+				}
+			}
+
 		}
 
 		$(document).ready(function () {
