@@ -27,16 +27,14 @@
 			<canvas id="sign" width="950" height="600"></canvas>
 		</div>
 		<div id="button">
-			<button type="button" id="save" class="btn btn-outline-dark" onclick="modal();">저장</button>
-			<button type="button" id="erase" class="btn btn-outline-dark" onclick="erase();">초기화</button>
+			<button type="button" id="save" class="btn btn-outline-dark" onclick="Modal();">저장</button>
+			<button type="button" id="erase" class="btn btn-outline-dark" onclick="Erase();">초기화</button>
 		</div>
 		<div id="dialog-message" title="저장하시겠습니까?" style="display:none">
 			<span>저장방법을 선택해주세요.</span>
 		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +46,7 @@
 		var drag = false;
 		var ctx = canvas[0].getContext("2d");
 
-		function modal() {
+		function Modal() {
 			$('#dialog-message').dialog({
 				modal: true,
 				resizable:false,
@@ -58,12 +56,12 @@
 						if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
 							alert("IE는 pdf를 사용할 수 없습니다. 다른 브라우저를 이용해주세요");
 						} else {
-							save_pdf();
+							Save_pdf();
 						}
 						$(this).dialog('close');
 					},
 					"이미지로 저장": function () {
-						save();
+						Save();
 						$(this).dialog('close');
 					},
 					"취소": function () { $(this).dialog('close'); }
@@ -72,26 +70,26 @@
 		}
 
 		$(document).ready(function () {
-			canvas.on("mousedown", pc_draw);
-			canvas.on("mousemove", pc_draw);
-			canvas.on("mouseup", pc_draw);
-			canvas.on("mouseout", pc_draw);
+			canvas.on("mousedown", Pc_draw);
+			canvas.on("mousemove", Pc_draw);
+			canvas.on("mouseup", Pc_draw);
+			canvas.on("mouseout", Pc_draw);
 
-			canvas.on("touchstart", mobile_draw);
-			canvas.on("touchend", mobile_draw);
-			canvas.on("touchcancel", mobile_draw);
-			canvas.on("touchmove", mobile_draw);
+			canvas.on("touchstart", Mobile_draw);
+			canvas.on("touchend", Mobile_draw);
+			canvas.on("touchcancel", Mobile_draw);
+			canvas.on("touchmove", Mobile_draw);
 		});
 		
 		// sign 초기화
-		function erase() {
+		function Erase() {
 			ctx.clearRect(0, 0, 1000, 600);
 			ctx.beginPath();
 			alert("삭제되었습니다.");
 		}
 
 		// sign 저장
-		function save() {
+		function Save() {
 			// -------------------- IE에서 사용가능한 함수 --------------------
 			var agent = navigator.userAgent.toLowerCase();
 			// 브라우저가 IE인 경우
@@ -114,7 +112,7 @@
 			}
 		}
 
-		function save_pdf() {
+		function Save_pdf() {
 			// pdf 저장
 			var doc = new jsPDF('p', 'mm', 'a4');
 			doc.addImage(canvas[0].toDataURL("image/png"), 'PNG', 0, 0); //이미지를 기반으로 pdf생성
@@ -122,7 +120,7 @@
 		}
 
 		// canvas(pc) 그림 그리는 함수
-		function pc_draw(evt) {
+		function Pc_draw(evt) {
 			switch (evt.type) {
 				case "mousedown": {
 					drag = true;
@@ -190,6 +188,14 @@
 			var y = evt.pageY - canvas.offset().top;
 			return { X: x, Y: y };
 		};
+
+		// canvas 좌표값(모바일)
+		function getMobilePosition(){
+			return {
+				X: e.changedTouches[0].pageX - canvas[0].offsetLeft,
+				Y: e.changedTouches[0].pageY - canvas[0].offsetTop
+			}
+		}
 
 	</script>
 </body>
