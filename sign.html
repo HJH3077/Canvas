@@ -24,7 +24,7 @@
 	<div>
 		<div style="text-align: center;">
 			<h2 style="padding: 10px;">전자서명</h2>
-			<canvas id="sign" width="1000" height="600"></canvas>
+			<canvas id="sign" width="900" height="600"></canvas>
 		</div>
 		<div id="button">
 			<button type="button" id="save" class="btn btn-outline-dark" onclick="modal();">저장</button>
@@ -69,7 +69,7 @@
 			});
 		}
 
-		$(document).ready(function() {
+		$(document).ready(function () {
 			canvas.on("mousedown", pc_draw);
 			canvas.on("mousemove", pc_draw);
 			canvas.on("mouseup", pc_draw);
@@ -188,6 +188,7 @@
 			var y = evt.pageY - canvas.offset().top;
 			return { X: x, Y: y };
 		};
+
 	</script>
 </body>
 </html>
