@@ -127,10 +127,16 @@
 		}
 
 		function Save_pdf() {
-			// pdf 저장
-			var doc = new jsPDF('p', 'mm', 'a4');
-			doc.addImage(canvas[0].toDataURL("image/png"), 'PNG', 0, 0); //이미지를 기반으로 pdf생성
-			doc.save('sign.pdf'); //pdf저장
+			// mobile 버전 pdf 저장
+			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				var blob = canvas[0].toDataURL("image/png");
+				window.open(URL.createObjectURL(blob));
+			} else {
+				// pc버전 pdf 저장
+				var doc = new jsPDF('p', 'mm', 'a4');
+				doc.addImage(canvas[0].toDataURL("image/png"), 'PNG', 0, 0); //이미지를 기반으로 pdf생성
+				doc.save('sign.pdf'); //pdf저장
+			}
 		}
 
 		// canvas(pc) 그림 그리는 함수
