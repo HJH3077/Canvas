@@ -150,9 +150,10 @@
 			}
 		}
 
+		// canvas(mobile) 그림 그리는 함수
 		function mobile_draw(evt) {
 			switch (evt.type) {
-				case "touchstart": {
+				case "touchstart": { // mobile이라서 mouse가 아닌 touch 이벤트 이용
 					drag = true;
 					ctx.beginPath();
 					ctx.moveTo(getMobilePosition(evt).X, getMobilePosition(evt).Y);
