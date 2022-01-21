@@ -53,11 +53,7 @@
 				width: "400px",
 				buttons: {
 					"PDF로 저장": function () {
-						if ((navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1)) {
-							alert("IE는 pdf를 사용할 수 없습니다. 다른 브라우저를 이용해주세요");
-						} else {
-							Save_pdf();
-						}
+						Save_pdf();
 						$(this).dialog('close');
 					},
 					"이미지로 저장": function () {
@@ -129,8 +125,9 @@
 		function Save_pdf() {
 			// mobile 버전 pdf 저장
 			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-				var blob = canvas[0].toDataURL("image/png");
-				window.open(URL.createObjectURL(blob));
+				var doc = new jsPDF('p', 'mm', 'a4');
+				var pdfOutput = doc.output("blob");
+				window.open(pdfOutput);
 			} else {
 				// pc버전 pdf 저장
 				var doc = new jsPDF('p', 'mm', 'a4');
