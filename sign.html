@@ -74,6 +74,11 @@
 			canvas.on("mousemove", pc_draw);
 			canvas.on("mouseup", pc_draw);
 			canvas.on("mouseout", pc_draw);
+
+			canvas.on("touchstart", mobile_draw);
+			canvas.on("touchend", mobile_draw);
+			canvas.on("touchcancel", mobile_draw);
+			canvas.on("touchmove", mobile_draw);
 		});
 		
 		// sign 초기화
@@ -138,6 +143,37 @@
 					break;
 
 				case "mouseout": {
+					drag = false;
+					ctx.closePath();
+				}
+					break;
+			}
+		}
+
+		function mobile_draw(evt) {
+			switch (evt.type) {
+				case "touchstart": {
+					drag = true;
+					ctx.beginPath();
+					ctx.moveTo(getMobilePosition(evt).X, getMobilePosition(evt).Y);
+				}
+					break;
+
+				case "touchmove": {
+					if (drag) {
+						evt.preventDefault();
+						ctx.lineTo(getMobilePosition(evt).X, getMobilePosition(evt).Y);
+						ctx.stroke();
+					}
+				}
+					break;
+
+				case "touchend": {
+					drag = false;
+				}
+					break;
+
+				case "touchcancel": {
 					drag = false;
 					ctx.closePath();
 				}
