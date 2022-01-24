@@ -108,13 +108,6 @@
 			}
 		}
 
-		// 모바일 pdf 처리
-		// 파일을 이미지처럼 받게하지 말고 pdf처럼 어케 처리하고 a태그로 다운받는 방법을 연구해봐야 할듯(열면 깨짐)
-
-		function Mobile() {
-			return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-		}
-
 		function Save_pdf() {
 			// pdf 저장
 			var doc = new jsPDF('p', 'mm', 'a4');
