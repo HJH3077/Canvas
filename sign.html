@@ -108,22 +108,27 @@
 			}
 		}
 
+		// 모바일 pdf 처리
+		// 파일을 이미지처럼 받게하지 말고 pdf처럼 어케 처리하고 a태그로 다운받는 방법을 연구해봐야 할듯(열면 깨짐)
+
 		function Save_pdf() {
+			/*
 			// mobile 버전 pdf 저장
 			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 				var link = document.createElement('a');
+				// 파일을 이미지처럼 받게하지 말고 pdf처럼 어케 처리하고 a태그로 다운받는 방법을 연구해봐야 할듯(열면 깨짐)
 				link.href = canvas[0].toDataURL("image/png");
 				link.download = 'file.pdf';
 				document.body.appendChild(link);
 				link.click();
 				document.body.removeChild(link);
-			} else {
+			} else {*/
 				// pc버전 pdf 저장
 				var doc = new jsPDF('p', 'mm', 'a4');
 				doc.addImage(canvas[0].toDataURL("image/png"), 'PNG', 0, 0); //이미지를 기반으로 pdf생성
 				doc.save('sign.pdf'); //pdf저장
 			}
-		}
+		//}
 
 		// canvas(pc) 그림 그리는 함수
 		function Pc_draw(evt) {
